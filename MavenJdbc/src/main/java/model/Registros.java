@@ -5,6 +5,7 @@ public abstract class Registros {
 	private String nome;
 	private String endereco;
 	private String bairro;
+	private String sexo;
 		
 	public String getNome() {
 		return nome;
@@ -23,5 +24,11 @@ public abstract class Registros {
 	}
 	public void setBairro(String bairro) {
 		this.bairro = bairro;
+	}
+	public String getSexo() {
+		return sexo;
+	}
+	public void setSexo(String sexo) {
+		this.sexo = sexo;
 	}
 }
