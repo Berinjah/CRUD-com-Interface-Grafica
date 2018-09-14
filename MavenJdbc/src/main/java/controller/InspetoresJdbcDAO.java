@@ -18,7 +18,7 @@ public class InspetoresJdbcDAO {
 	}
 	
 	public void salvar (Inspetores c) throws SQLException{
-		String sql="insert into inspetores (nome, endereco, bairro) values ('"+c.getNome()+"','"+c.getEndereco()+"','"+c.getBairro()+"')";
+		String sql="insert into inspetores (nome, endereco, bairro, sexo) values ('"+c.getNome()+"','"+c.getEndereco()+"','"+c.getBairro()+"','"+c.getSexo()+"')";
 		System.out.println(sql);
 		PreparedStatement prepareStatement = this.conn.prepareStatement(sql);
 		prepareStatement.executeUpdate();
@@ -26,7 +26,7 @@ public class InspetoresJdbcDAO {
 	}
 	
 	public void deletar (int id) throws SQLException{
-		String sql = "delete from inspetores where id = '"+id+"'";
+		String sql = "delete from inspetores where ri = '"+id+"'";
 		System.out.println(sql);
 		PreparedStatement prepareStatement = this.conn.prepareStatement(sql);
 		prepareStatement.executeUpdate();
@@ -34,7 +34,7 @@ public class InspetoresJdbcDAO {
 	}
 	
 	public void alterar(Inspetores c, int id) {
-		String sql = "update inspetores set nome = '"+c.getNome()+"', endereco = '"+c.getEndereco()+"', bairro = '"+c.getBairro()+"'where id = '"+id+"';";
+		String sql = "update inspetores set nome = '"+c.getNome()+"', endereco = '"+c.getEndereco()+"', bairro = '"+c.getBairro()+"', sexo='"+c.getSexo()+"'where ri = '"+id+"';";
 		System.out.println(sql);
 		PreparedStatement prepareStatement;
 		try {
@@ -54,7 +54,7 @@ public class InspetoresJdbcDAO {
 			PreparedStatement prepareStatement = this.conn.prepareStatement(sql);
 			ResultSet rs = prepareStatement.executeQuery();
 			while(rs.next()) {
-				System.out.println("ri="+rs.getInt("ri")+" nome="+rs.getString("nome")+" endereco="+rs.getString("endereco")+" bairro="+rs.getString("bairro"));
+				System.out.println("ri="+rs.getInt("ri")+" nome="+rs.getString("nome")+" endereco="+rs.getString("endereco")+" bairro="+rs.getString("bairro")+" sexo="+rs.getString("sexo"));
 			}
 		}catch (SQLException e) {
 			e.printStackTrace();

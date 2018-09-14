@@ -17,7 +17,7 @@ public class CoordenadoresJdbcDAO {
 	}
 	
 	public void salvar (Coordenadores c) throws SQLException{
-		String sql="insert into coordenadores (nome, endereco, bairro) values ('"+c.getNome()+"','"+c.getEndereco()+"','"+c.getBairro()+"')";
+		String sql="insert into coordenadores (nome, endereco, bairro, sexo) values ('"+c.getNome()+"','"+c.getEndereco()+"','"+c.getBairro()+"','"+c.getSexo()+"')";
 		System.out.println(sql);
 		PreparedStatement prepareStatement = this.conn.prepareStatement(sql);
 		prepareStatement.executeUpdate();
@@ -25,7 +25,7 @@ public class CoordenadoresJdbcDAO {
 	}
 	
 	public void deletar (int id) throws SQLException{
-		String sql = "delete from coordenadores where id = '"+id+"'";
+		String sql = "delete from coordenadores where rc = '"+id+"'";
 		System.out.println(sql);
 		PreparedStatement prepareStatement = this.conn.prepareStatement(sql);
 		prepareStatement.executeUpdate();
@@ -33,7 +33,7 @@ public class CoordenadoresJdbcDAO {
 	}
 	
 	public void alterar(Coordenadores c, int id) {
-		String sql = "update coordenadores set nome = '"+c.getNome()+"', endereco = '"+c.getEndereco()+"', bairro = '"+c.getBairro()+"'where id = '"+id+"';";
+		String sql = "update coordenadores set nome = '"+c.getNome()+"', endereco = '"+c.getEndereco()+"', bairro = '"+c.getBairro()+"', sexo='"+c.getSexo()+"'where rc = '"+id+"';";
 		System.out.println(sql);
 		PreparedStatement prepareStatement;
 		try {
@@ -53,7 +53,7 @@ public class CoordenadoresJdbcDAO {
 			PreparedStatement prepareStatement = this.conn.prepareStatement(sql);
 			ResultSet rs = prepareStatement.executeQuery();
 			while(rs.next()) {
-				System.out.println("rc="+rs.getInt("rc")+" nome="+rs.getString("nome")+" endereco="+rs.getString("endereco")+" bairro="+rs.getString("bairro"));
+				System.out.println("rc="+rs.getInt("rc")+" nome="+rs.getString("nome")+" endereco="+rs.getString("endereco")+" bairro="+rs.getString("bairro")+" sexo="+rs.getString("sexo"));
 			}
 		}catch (SQLException e) {
 			e.printStackTrace();

@@ -17,7 +17,7 @@ public class ProfessoresJdbcDAO {
 	}
 
 	public void salvar (Professores c) throws SQLException{
-		String sql="insert into professores (nome, endereco, bairro, rc) values ('"+c.getNome()+"','"+c.getEndereco()+"','"+c.getBairro()+"','"+c.getRc()+"')"; 
+		String sql="insert into professores (nome, endereco, bairro, rc, sexo) values ('"+c.getNome()+"','"+c.getEndereco()+"','"+c.getBairro()+"','"+c.getRc()+"','"+c.getSexo()+"')"; 
 		System.out.println(sql);
 		PreparedStatement prepareStatement = this.conn.prepareStatement(sql);
 		prepareStatement.executeUpdate();
@@ -25,7 +25,7 @@ public class ProfessoresJdbcDAO {
 	}
 	
 	public void deletar (int id) throws SQLException{
-		String sql = "delete from professores where id = '"+id+"'";
+		String sql = "delete from professores where rp = '"+id+"'";
 		System.out.println(sql);
 		PreparedStatement prepareStatement = this.conn.prepareStatement(sql);
 		prepareStatement.executeUpdate();
@@ -33,7 +33,7 @@ public class ProfessoresJdbcDAO {
 	}
 	
 	public void alterar(Professores c, int id) {
-		String sql = "update professores set nome = '"+c.getNome()+"', endereco = '"+c.getEndereco()+"', bairro = '"+c.getBairro()+"', rc = '"+c.getRc()+"'where id = '"+id+"';";
+		String sql = "update professores set nome = '"+c.getNome()+"', endereco = '"+c.getEndereco()+"', bairro = '"+c.getBairro()+"', rc = '"+c.getRc()+"', sexo='"+c.getSexo()+"'where rp = '"+id+"';";
 		System.out.println(sql);
 		PreparedStatement prepareStatement;
 		try {
@@ -53,7 +53,7 @@ public class ProfessoresJdbcDAO {
 			PreparedStatement prepareStatement = this.conn.prepareStatement(sql);
 			ResultSet rs = prepareStatement.executeQuery();
 			while(rs.next()) {
-				System.out.println("rp="+rs.getInt("rp")+" nome="+rs.getString("nome")+" endereco="+rs.getString("endereco")+" bairro="+rs.getString("bairro")+" rc="+rs.getInt("rc"));
+				System.out.println("rp="+rs.getInt("rp")+" nome="+rs.getString("nome")+" endereco="+rs.getString("endereco")+" bairro="+rs.getString("bairro")+" sexo="+rs.getString("sexo")+" rc="+rs.getInt("rc"));
 			}
 		}catch (SQLException e) {
 			e.printStackTrace();
