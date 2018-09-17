@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import view.App;
+import view.Table;
 import view.Telas;
 import model.Alunos;
 
@@ -64,7 +65,8 @@ public class AlunosJdbcDAO {
 					
 					listaAlunos.add(Telas.alunos);
 					
-					
+					Table.
+
 					Telas.tabela.addRow(new Object[] {Telas.alunos.getRm(), Telas.alunos.getNome(),  
 							Telas.alunos.getEndereco(), Telas.alunos.getBairro(), Telas.alunos.getSexo()});
 										

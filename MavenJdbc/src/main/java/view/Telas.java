@@ -12,10 +12,13 @@ import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.event.InternalFrameEvent;
+import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 
 import controller.AlunosJdbcDAO;
@@ -65,22 +68,18 @@ public class Telas extends JFrame {
 	final JLabel sexoM = new JLabel ("Masc.");
 	final JLabel sexoF = new JLabel ("Femin.");
 	
-	
-	
 	public static DefaultTableModel tabela = new DefaultTableModel();
 	JTable table = new JTable(tabela);
 	
-	
 	Container paine = this.getContentPane();
 	JDesktopPane desktop = new JDesktopPane();
+	JPanel panelPrincipal = new JPanel();
 	
 	public void criarTelas(){
-			
-		paine.add(desktop);
-		
-		desktop.setLayout(null);
-		desktop.add(cbxTipoCadastro);
-		desktop.add(tipo);
+				
+		panelPrincipal.setLayout(null);
+		panelPrincipal.add(cbxTipoCadastro);
+		panelPrincipal.add(tipo);
 		cbxTipoCadastro.addItem("Aluno");
 		cbxTipoCadastro.addItem("Professor");
 		cbxTipoCadastro.addItem("Coordenador");
@@ -88,11 +87,11 @@ public class Telas extends JFrame {
 		tipo.setBounds(70, 10, 100, 30);
 		cbxTipoCadastro.setBounds(70, 40, 100, 30);
 		
-		desktop.add(selecaoFuncao);
-		desktop.add(btnSalvar);
-		desktop.add(btnDeletar);
-		desktop.add(btnAtualizar);
-		desktop.add(btnListar);
+		panelPrincipal.add(selecaoFuncao);
+		panelPrincipal.add(btnSalvar);
+		panelPrincipal.add(btnDeletar);
+		panelPrincipal.add(btnAtualizar);
+		panelPrincipal.add(btnListar);
 		
 		bg.add(rdbSexoM);
 		bg.add(rdbSexoF);
@@ -112,6 +111,7 @@ public class Telas extends JFrame {
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				abrirTelaSalvar();
+				panelPrincipal.setVisible(false);
 			}
 		});
 		
@@ -119,25 +119,33 @@ public class Telas extends JFrame {
 		btnDeletar.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				abrirTelaDeletar();
+				panelPrincipal.setVisible(false);
 			}
 		});
 		
 		btnAtualizar.setBounds(10, 170, 100, 30);
 		btnAtualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				abrirTelaAtualizar();				
+				abrirTelaAtualizar();
+				panelPrincipal.setVisible(false);
 			}
 		});
 		
 		btnListar.setBounds(125, 170, 100, 30);
 		btnListar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				abrirTelaListar(); 	
+				abrirTelaListar(); 
+				panelPrincipal.setVisible(false);
 			}
 		});
-				
+		
+		panelPrincipal.setVisible(true);
+		panelPrincipal.setSize(550, 550);
+		desktop.setSize(550, 550);
 		desktop.setVisible(true);
-				
+		desktop.add(panelPrincipal);
+		paine.add(desktop);
+		
 		this.setVisible(true);
 		this.setSize(550, 550);
 		this.setResizable(false);
@@ -145,10 +153,10 @@ public class Telas extends JFrame {
 	}
 	
 	public void abrirTelaSalvar() {
+		
 		JInternalFrame jif = new JInternalFrame("Novo cadastro");
 		
 		JButton btn = new JButton("Cadastrar");
-		
 		jif.add(nome);
 		jif.add(txtNome);	
 		nome.setBounds(10, 15, 45, 30);
@@ -270,6 +278,50 @@ public class Telas extends JFrame {
 				}	
 			}
 		});
+		jif.addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+			@Override
+			public void internalFrameClosed(InternalFrameEvent evt)
+	        {
+				panelPrincipal.setVisible(true);
+				//desktop.setVisible(false);
+	        }
+
+			@Override
+			public void internalFrameOpened(InternalFrameEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void internalFrameClosing(InternalFrameEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void internalFrameIconified(InternalFrameEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void internalFrameDeiconified(InternalFrameEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void internalFrameActivated(InternalFrameEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void internalFrameDeactivated(InternalFrameEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		jif.setLayout(null);
 		jif.setClosable(true);
 		jif.setVisible(true);
@@ -330,6 +382,50 @@ public class Telas extends JFrame {
 						ex.printStackTrace();
 					}
 				}
+			}
+		});
+		jif.addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+			@Override
+			public void internalFrameClosed(InternalFrameEvent evt)
+	        {
+				panelPrincipal.setVisible(true);
+				//desktop.setVisible(false);
+	        }
+
+			@Override
+			public void internalFrameOpened(InternalFrameEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void internalFrameClosing(InternalFrameEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void internalFrameIconified(InternalFrameEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void internalFrameDeiconified(InternalFrameEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void internalFrameActivated(InternalFrameEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void internalFrameDeactivated(InternalFrameEvent e) {
+				// TODO Auto-generated method stub
+				
 			}
 		});
 		jif.setLayout(null);
@@ -473,6 +569,50 @@ public class Telas extends JFrame {
 				}
 			}
 		});
+		jif.addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+			@Override
+			public void internalFrameClosed(InternalFrameEvent evt)
+	        {
+				panelPrincipal.setVisible(true);
+				//desktop.setVisible(false);
+	        }
+
+			@Override
+			public void internalFrameOpened(InternalFrameEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void internalFrameClosing(InternalFrameEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void internalFrameIconified(InternalFrameEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void internalFrameDeiconified(InternalFrameEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void internalFrameActivated(InternalFrameEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void internalFrameDeactivated(InternalFrameEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		jif.setLayout(null);
 		jif.setClosable(true);
 		jif.setVisible(true);
@@ -517,23 +657,66 @@ public class Telas extends JFrame {
 		
 		
 		btn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+				public void actionPerformed(ActionEvent e) {
 				while (tabela.getRowCount() > 0) {
 					tabela.removeRow(0);
-			    }
+				}
 				 try {
 					 Connection connection = JdbUtil.getConnection();
 					 AlunosJdbcDAO alunosJdbcDao = new AlunosJdbcDAO(connection);
 					 alunosJdbcDao.listar();
 				 }catch(Exception ex){
-					 ex.printStackTrace();
+						 ex.printStackTrace();
 				 }
 			}
 		});
-		
-	jif.setLayout(null);
-	jif.setClosable(true);
-	jif.setVisible(true);
-	desktop.add(jif);	
+		jif.addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+			@Override
+			public void internalFrameClosed(InternalFrameEvent evt)
+	        {
+				panelPrincipal.setVisible(true);
+				//desktop.setVisible(false);
+	        }
+
+			@Override
+			public void internalFrameOpened(InternalFrameEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void internalFrameClosing(InternalFrameEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void internalFrameIconified(InternalFrameEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void internalFrameDeiconified(InternalFrameEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void internalFrameActivated(InternalFrameEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void internalFrameDeactivated(InternalFrameEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});		
+		jif.setLayout(null);
+		jif.setClosable(true);
+		jif.setVisible(true);
+		desktop.add(jif);	
 	}
 }
