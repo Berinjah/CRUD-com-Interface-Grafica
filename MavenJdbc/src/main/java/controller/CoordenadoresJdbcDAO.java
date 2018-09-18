@@ -12,6 +12,8 @@ import model.Coordenadores;
 public class CoordenadoresJdbcDAO {
 
 	private Connection conn;
+	List<Coordenadores> coordenadores = new ArrayList<Coordenadores>();
+	
 	public CoordenadoresJdbcDAO(Connection conn) {
 		this.conn = conn;
 	}
@@ -48,7 +50,7 @@ public class CoordenadoresJdbcDAO {
 	public List<Coordenadores> listar(){
 		String sql = "select * from coordenadores";
 		System.out.println(sql);
-		List<Coordenadores> coordenadores = new ArrayList<Coordenadores>();
+		
 		try {
 			PreparedStatement prepareStatement = this.conn.prepareStatement(sql);
 			ResultSet rs = prepareStatement.executeQuery();

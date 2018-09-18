@@ -68,9 +68,6 @@ public class Telas extends JFrame {
 	final JLabel sexoM = new JLabel ("Masc.");
 	final JLabel sexoF = new JLabel ("Femin.");
 	
-	public static DefaultTableModel tabela = new DefaultTableModel();
-	JTable table = new JTable(tabela);
-	
 	Container paine = this.getContentPane();
 	JDesktopPane desktop = new JDesktopPane();
 	JPanel panelPrincipal = new JPanel();
@@ -97,14 +94,14 @@ public class Telas extends JFrame {
 		bg.add(rdbSexoF);
 		
 
-		tabela.addColumn("ID");
-		tabela.addColumn("Nome");
-		tabela.addColumn("Endereço");
-		tabela.addColumn("Bairro");
-		tabela.addColumn("Sexo");
-		if(cbxTipoCadastro.getSelectedItem().equals("Professor")) {
-			tabela.addColumn("RC");
-		}
+//		tabela.addColumn("ID");
+//		tabela.addColumn("Nome");
+//		tabela.addColumn("Endereço");
+//		tabela.addColumn("Bairro");
+//		tabela.addColumn("Sexo");
+//		if(cbxTipoCadastro.getSelectedItem().equals("Professor")) {
+//			tabela.addColumn("RC");
+//		}
 		
 		selecaoFuncao.setBounds(25, 100, 200, 20);
 		btnSalvar.setBounds(10, 120, 100, 30);
@@ -641,26 +638,25 @@ public class Telas extends JFrame {
 		jif.add(btn);
 		btn.setBounds(120, 370, 100, 30);
 		
-		JScrollPane scrollPane = new JScrollPane(table);
-		jif.add(scrollPane);
+		jif.add(AlunosJdbcDAO.scrollPane);
 		
 			
 		if(cbxTipoCadastro.getSelectedItem().equals("Professor")) {
 			jif.setSize(450, 460);
-			tabela.addColumn("RC");
-			scrollPane.setBounds(30, 140, 350, 200);
+//			tabela.addColumn("RC");
+			AlunosJdbcDAO.scrollPane.setBounds(30, 140, 350, 200);
 			
 		}else {
 			jif.setSize(410, 460);
-		    scrollPane.setBounds(30, 140, 330, 200);
+			AlunosJdbcDAO.scrollPane.setBounds(30, 140, 330, 200);
 		}
 		
 		
 		btn.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-				while (tabela.getRowCount() > 0) {
-					tabela.removeRow(0);
-				}
+//				while (tabela.getRowCount() > 0) {
+//					tabela.removeRow(0);
+//				}
 				 try {
 					 Connection connection = JdbUtil.getConnection();
 					 AlunosJdbcDAO alunosJdbcDao = new AlunosJdbcDAO(connection);

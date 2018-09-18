@@ -12,6 +12,7 @@ import model.Inspetores;
 public class InspetoresJdbcDAO {
 
 	private Connection conn;
+	List<Inspetores> inspetores = new ArrayList<Inspetores>();
 	
 	public InspetoresJdbcDAO(Connection conn) {
 		this.conn = conn;
@@ -49,7 +50,7 @@ public class InspetoresJdbcDAO {
 	public List<Inspetores> listar(){
 		String sql = "select * from inspetores";
 		System.out.println(sql);
-		List<Inspetores> inspetores = new ArrayList<Inspetores>();
+		
 		try {
 			PreparedStatement prepareStatement = this.conn.prepareStatement(sql);
 			ResultSet rs = prepareStatement.executeQuery();

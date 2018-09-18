@@ -12,6 +12,8 @@ import model.Professores;
 public class ProfessoresJdbcDAO {
 	
 	private Connection conn;
+	List<Professores> professores = new ArrayList<Professores>();
+	
 	public ProfessoresJdbcDAO(Connection conn) {
 		this.conn = conn;
 	}
@@ -48,7 +50,7 @@ public class ProfessoresJdbcDAO {
 	public List<Professores> listar(){
 		String sql = "select * from professores";
 		System.out.println(sql);
-		List<Professores> professores = new ArrayList<Professores>();
+		
 		try {
 			PreparedStatement prepareStatement = this.conn.prepareStatement(sql);
 			ResultSet rs = prepareStatement.executeQuery();
